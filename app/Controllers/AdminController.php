@@ -24,63 +24,49 @@ class AdminController extends Controller {
     public function inscription(Request $request, Response $response, $args){
         header("Access-Control-Allow-Origin: *");
         $data = $request->getParsedBody();
-        //$params = json_decode($data);
+        $params = json_decode($data['reqestParam']);
+        $patient = $params->patient;
+        $patientEnquete = $params->patientEnquete;
 
-        // $adminModel = new AdminModel($this->db);
-        // $reponse = $adminModel->getPatients();
-       $temperature =  intval("36");
-       $toux = "oui";
-       $difresp = "non";
-       $Malgorge =  "non";
-       $conjonctivite = "non";
-       $mauxTete = "non";
-       $nezbouche = "non";
-       $douleurmusculaire = "non";
-       $fatige = "non";
-       $vomi = "non";
-       $diarrhee = "non";
-       $perteOdora = "non";
-       $perteGout = "non";
-       $autreSigne = "non";
-
-       $id_patient = 1;
-
-       $syntomesEntourage = "non";
-       $heur = "matin";
+       $heur = $patient->datenaissace;
        $date = "2020-05-20 13:34:30";
-       $code = "5456465465";
-       $nom =  "mbaye";
-       $prenom =  "moustafa";
-       $sexe =  "homme";
-       $naissance =  "2016-01-13";
-       $telephone = "776542312";
-       $ville = "Dakar";
-       $niveaucascontact =  "niveaucascontact";
-       $region =  "Dakar";
-       $quartier =  "Yoff";
-       $district =  "Foire";
-       $matrimanial =  "marié";
-       $nbrEnfants =  intval("2");
-       $grossesse = "non";
-       $nbrPersChezVous = intval("5");
-       $nbrPersChambre =  intval("2");
-       $TravallezVous =  "oui";
-       $domain = "santé";
-       $scolarise = "oui";
-       $dateContact = "2020-01-16";
-       $lienAvecCove =  "";
-       $dateContactautorite =  "2020-01-23";
-       $contacter =  "oui";
-       $lieuxFrenquenter =  "Grand Yoff";
-       $symtom = "fievre, toux";
-       $autreMaladie = "rhume";
-       $medicaments =  "paracetamole";
+       $code = $patient->code;;
+       $nom =  $patient->nom;
+       $prenom =  $patient->prenom;;
+       $sexe =  $patient->sexe;
+       $naissance =  $patient->datenaissace;
+       $telephone = $patient->telephone;
+       $ville = $patient->ville;
+       $niveaucascontact =  $patient->datenaissace;;
+       $region =  $patient->region;
+       $quartier =  $patient->quartier;
+       $district =  $patient->district;
+       $matrimanial =  $patient->statutMatrimoniale;
+       $nbrEnfants =  intval($patient->nombreEnfant);
+       $grossesse = $patient->grossesse;
+       $nbrPersChezVous = intval($patient->nombrePersonneChezVous);
+       $nbrPersChambre =  intval($patient->nombrePersonneDansChambre);
+       $TravallezVous =  $patient->travaillezVous;
+       $domain = $patient->domaine;
+       $scolarise = $patient->scolarise;
+       $dateContact = $patient->dateContact;;
+       $lienAvecCove =  $patientEnquete->lien;;
+       $dateContactautorite =  $patientEnquete->dataContactSanitaire;;
+       $contacter =  $patient->datenaissace;;
+       $lieuxFrenquenter =  $patientEnquete->lieux;;
+       $symtom = json_encode($patientEnquete->symptome);
+       $autreMaladie = $patientEnquete->autremaladie;
+       $medicaments =  $patientEnquete->listeMedicament;;
+       $repondant = $patient->repondant;
+
+       $nombrePersonneEnContact = $patientEnquete->$nombrePersonneEnContact;
+       $cardiaque = $patientEnquete->cardiaque;
 
        $adminModel = new AdminModel($this->db);
-       $reponse = $adminModel->inscription($syntomesEntourage,$heur,$date,$code,$nom,$prenom,$sexe,$naissance,
+       $reponse = $adminModel->inscription($repondant,$syntomesEntourage,$heur,$date,$code,$nom,$prenom,$sexe,$naissance,
        $telephone,$ville,$niveaucascontact,$region,$quartier,$district,$matrimanial,$nbrEnfants,
        $grossesse,$nbrPersChezVous,$nbrPersChambre,$TravallezVous,$domain,$scolarise,$dateContact,$lienAvecCove,
-       $dateContactautorite,$contacter,$lieuxFrenquenter,$symtom,$autreMaladie,$medicaments);
+       $dateContactautorite,$contacter,$lieuxFrenquenter,$symtom,$autreMaladie,$medicaments,$nombrePersonneEnContact , $cardiaque);
 
        // $id_patient = $reponse;
        //
@@ -94,31 +80,31 @@ class AdminController extends Controller {
     public function enregitrement(Request $request, Response $response, $args){
         header("Access-Control-Allow-Origin: *");
         $data = $request->getParsedBody();
-        //$params = json_decode($data);
+        $params = json_decode($data['reqestParam']);
 
         // $adminModel = new AdminModel($this->db);
         // $reponse = $adminModel->getPatients();
-       $temperature =  intval("36");
-       $toux = "oui";
-       $difresp = "non";
-       $Malgorge =  "non";
-       $conjonctivite = "non";
-       $mauxTete = "non";
-       $nezbouche = "non";
-       $douleurmusculaire = "non";
-       $fatige = "non";
-       $vomi = "non";
-       $diarrhee = "non";
-       $perteOdora = "non";
-       $perteGout = "non";
-       $autreSigne = "non";
-       $syntomesEntourage = "non";
-       $id_patient = 1;
-       $heur = "matin";
+       $temperature =  intval($params->temperature);
+       $toux = $params->toux;
+       $difresp = $params->difficulteRespirer;
+       $Malgorge =  $params->malGorge;
+       $conjonctivite = $params->conjonctivite;
+       $mauxTete = $params->mauxtete;
+       $nezbouche = $params->nezBouche;
+       $douleurmusculaire = $params->douleurMusculaire;
+       $fatige = $params->fatigueintense;
+       $vomi = $params->vomissement;
+       $diarrhee = $params->diarrhee;
+       $perteOdora = $params->perteOdorat;
+       $perteGout = $params->perteGout;
+       $autreSigne = $params->autreSigne;
+       $syntomesEntourage = $params->signeEntouragevalue;
+       $code_patient = $params->code;
+       $heur = $params->moment;
        $date = "2020-05-20 13:34:30";
 
        $adminModel = new AdminModel($this->db);
-       $reponse = $adminModel->enregitrement($date,$heur,$syntomesEntourage,$id_patient, $temperature,$toux,$difresp,$Malgorge,$conjonctivite,$mauxTete,$nezbouche,$douleurmusculaire,
+       $reponse = $adminModel->enregitrement($date,$heur,$syntomesEntourage,$code_patient, $temperature,$toux,$difresp,$Malgorge,$conjonctivite,$mauxTete,$nezbouche,$douleurmusculaire,
        $fatige,$vomi,$diarrhee,$perteOdora,$perteGout,$autreSigne);
 
         return $response->withJson(array("reponse", $reponse));
