@@ -13,6 +13,7 @@ use \App\Models\AdminModel;
 class AdminController extends Controller {
 
   	public function home(Request $request, Response $response, $args){
+        header("Access-Control-Allow-Origin: *");
         return $response->withJson(array("message", "WELCOME"));
 
         // data = $request->getParsedBody();
@@ -21,7 +22,7 @@ class AdminController extends Controller {
     }
 
     public function inscription(Request $request, Response $response, $args){
-
+        header("Access-Control-Allow-Origin: *");
         $data = $request->getParsedBody();
         //$params = json_decode($data);
 
@@ -91,7 +92,7 @@ class AdminController extends Controller {
 
 
     public function enregitrement(Request $request, Response $response, $args){
-
+        header("Access-Control-Allow-Origin: *");
         $data = $request->getParsedBody();
         //$params = json_decode($data);
 
@@ -126,6 +127,7 @@ class AdminController extends Controller {
 
 
     public function getPatients(Request $request, Response $response, $args){
+        header("Access-Control-Allow-Origin: *");
         $adminModel = new AdminModel($this->db);
         $reponse = $adminModel->getPatients();
         // data = $request->getParsedBody();
@@ -134,6 +136,7 @@ class AdminController extends Controller {
     }
 
     public function getPatientsSymptomes(Request $request, Response $response, $args){
+        header("Access-Control-Allow-Origin: *");
         $adminModel = new AdminModel($this->db);
         $reponse = $adminModel->getsymptoms();
         // data = $request->getParsedBody();
